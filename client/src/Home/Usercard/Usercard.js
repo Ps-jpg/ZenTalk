@@ -12,18 +12,23 @@ const Usercard = (props) => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     history.push("/");
     window.location.reload();
   };
+
   return (
     <div className="user-card-container">
-      <div className="image-div">
-        <img src={imageUrl} alt="Profile pic" className="profile-pic"></img>
-      </div>
+  <div className="image-div">
+  {imageUrl && <img src={imageUrl} alt="Profile pic" className="profile-pic" />}
+</div>
+
       <div className="user-text">
+        <p>User Name↓</p>
         <p className="user-name">{name}</p>
+        <p>User ID↓</p>
         <p className="user-id">{userid}</p>
       </div>
       <button className="logout-button" onClick={logout}>

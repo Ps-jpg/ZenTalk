@@ -7,7 +7,7 @@
 
 .user-card-container {
   /* width: fit-content; */
-  width: 13.5rem;
+  width: 13rem;
   display: inline-flex;
   flex-direction: row;
   justify-content: flex-start;

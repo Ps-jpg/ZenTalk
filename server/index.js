@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const mongodb =
-  "mongodb+srv://utiwari18:umang1806@cluster0.audch.mongodb.net/Colloquy?retryWrites=true&w=majority";
+  "mongodb+srv://Admin:zen@zendb.twqihao.mongodb.net/?retryWrites=true&w=majority";
 mongoose
   .connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
   socket.on("new-user-sending", ({ userName, name, imgUrl }) => {
     const newUserDB = new userList({ userName, name, imgUrl });
     try {
-      newUserDB.save();
+      // newUserDB.save();
     } catch (err) {
       console.log("Duplicate value");
     }

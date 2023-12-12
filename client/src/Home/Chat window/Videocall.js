@@ -32,13 +32,13 @@ const Videocall = (props) => {
   const connectionRef = useRef();
 
   useEffect(() => {
-    //Webcam streaming enabled here
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         setStream(stream);
         myVideo.current.srcObject = stream;
       });
+
     setIdToCall(props.currentUser.userID);
     setMe(socket.id);
 
@@ -50,8 +50,7 @@ const Videocall = (props) => {
     });
   }, [props.showVideoCall]);
 
-  const callUser = (id) => {
-    console.log("Call user activated");
+  useEffect(() => {
     const peer = new Peer({
       initiator: true,
       trickle: false,
@@ -60,7 +59,7 @@ const Videocall = (props) => {
 
     peer.on("signal", (data) => {
       socket.emit("callUser", {
-        userToCall: id,
+        userToCall: idToCall,
         signalData: data,
         from: me,
         name: name,
@@ -77,6 +76,17 @@ const Videocall = (props) => {
     });
 
     connectionRef.current = peer;
+
+    return () => {
+      if (connectionRef.current) {
+        connectionRef.current.destroy();
+      }
+    };
+  }, [stream, me, idToCall, name]);
+
+  const callUser = () => {
+    // Call this function to initiate the call
+    // The logic is now moved to the useEffect hook
   };
 
   const answerCall = () => {
@@ -104,22 +114,16 @@ const Videocall = (props) => {
     setCallEnded(true);
     connectionRef.current.destroy();
     if (stream != null) {
-      stream.getTracks().map(function (val) {
-        val.stop();
-      });
+      stream.getTracks().forEach((track) => track.stop());
     }
     props.showCallStatus(callEnded);
-    return;
   };
 
   socket.on("callEnded", () => {
-    console.log("Call ended with user");
     setCallEnded(true);
     connectionRef.current.destroy();
     if (stream != null) {
-      stream.getTracks().map(function (val) {
-        val.stop();
-      });
+      stream.getTracks().forEach((track) => track.stop());
     }
     props.showCallStatus(callEnded);
   });
@@ -129,9 +133,7 @@ const Videocall = (props) => {
       leaveCall();
     } else {
       if (stream != null) {
-        stream.getTracks().map(function (val) {
-          val.stop();
-        });
+        stream.getTracks().forEach((track) => track.stop());
       }
       props.showCallStatus(callEnded);
     }
@@ -182,7 +184,7 @@ const Videocall = (props) => {
             ></FontAwesomeIcon>
           </div>
         ) : (
-          <div onClick={() => callUser(idToCall)} className="make-call-button">
+          <div onClick={callUser} className="make-call-button">
             <FontAwesomeIcon
               icon={faPhone}
               className="make-call-icon"

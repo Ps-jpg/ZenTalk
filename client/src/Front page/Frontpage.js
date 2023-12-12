@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Frontpage.css";
 import logo from "./logo.png";
+import logo1 from "./logo1.png";
 import google_icon from "./google_icon.png";
 import Particles from "react-particles-js";
 import Footer from "./Footer";
@@ -42,7 +43,7 @@ const Frontpage = () => {
   return (
     <div className="NavBar">
       <div className="container">
-        <img src={logo} alt="logo" className="Nav-logo"></img>
+        <img src={logo1} alt="logo1" className="Nav-logo"></img>
         <div className="main-logo-div">
           <img src={logo} alt="logo" className="main-logo"></img>
           <p className="main-text">
@@ -69,7 +70,7 @@ const Frontpage = () => {
 
           <hr className="rule"></hr>
           <p className="learn-more">
-            <span style={{ color: "#44D096" }}>Learn More</span> about Colloquy
+          <span style={{ color: "#44D096" }}>Learn More</span> about ZenTalk
           </p>
         </div>
 
