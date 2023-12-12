@@ -12,7 +12,7 @@ Retrieve User data such as profile pic , username , messages etc.
 
 Frontend-ReactJS.
 Backend-NodeJS,Socket.io,WebRTC,SimplepeerJS,MongoDB,Express.
-
+https://zentalk-d8cf0.web.app/ (on progress hosting)
 UI
 ![Screenshot 2023-12-13 at 01-08-16 Zen Talk](https://github.com/Ps-jpg/ZenTalk/assets/65162956/94cc2457-fb12-431f-ae42-e68e9a8bae12)
 ![Screenshot 2023-12-13 at 01-34-43 Zen Talk](https://github.com/Ps-jpg/ZenTalk/assets/65162956/2326f097-8fb9-42cd-b6ff-c9f7700210d9)
